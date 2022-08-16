@@ -17,9 +17,11 @@ local settings =
 	periodicHitAudio = true,
 	periodicCritAudio = true,
 
+	--@debug@
 	--debugNonPeriodic = true,
 	--debugPeriodic = true,
 	--debugSchool = true,
+	--@end-debug@
 };
 
 local periodicSpellIDs =
