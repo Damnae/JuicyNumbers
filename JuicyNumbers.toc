@@ -1,0 +1,9 @@
+## Interface: 90205
+## Version: 0.1
+## Title: JuicyNumbers
+## Author: Damnae
+## SavedVariables: JuicyNumbersDB
+## Notes: Fancy looking damage numbers.
+## OptionalDeps: 
+
+JuicyNumbers.lua
