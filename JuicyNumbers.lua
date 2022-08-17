@@ -33,6 +33,7 @@ local periodicSpellIDs =
 	-- X Procs on attack like Frost mage's icicles
 
 	-- Warrior
+	326062, -- Ancient Aftershock
 
 	-- Death Knight
 	52212, -- Death And Decay
