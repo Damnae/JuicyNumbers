@@ -91,6 +91,7 @@ local periodicSpellIDs =
 
 	-- Mage
 	205345, -- Conflagration Flare Up
+	205472, -- Flame Patch
 	59638, -- (Mirror Image's) Frostbolt
 
 	-- Void Elf
