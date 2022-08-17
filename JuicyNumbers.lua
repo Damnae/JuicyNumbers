@@ -1,7 +1,5 @@
 local settings =
 {
-	--showAllSources = true,
-	--personal = true,
 	nameplateOffset = -48,
 	behavior = "ADD", -- "STACK", "ADD" or nil
 	maxCombo = 20, -- Makes sure a STACK or ADD combo doesn't last too long
@@ -10,7 +8,6 @@ local settings =
 	--colorByCrit = true,
 	colorPhysicalByCrit = true,
 	--longLastingPeriodics = true,
-	juiceFactor = 1,
 
 	hitAudio = true,
 	critAudio = true,
@@ -18,6 +15,9 @@ local settings =
 	periodicCritAudio = true,
 
 	--@debug@
+	showAllSources = true,
+	personal = true,
+	juiceFactor = 231,
 	--debugNonPeriodic = true,
 	--debugPeriodic = true,
 	--debugSchool = true,
@@ -97,7 +97,7 @@ local periodicSpellIDs =
 	259756, -- Entropic Embrace
 };
 
-nonPeriodicSpellIDs =
+local nonPeriodicSpellIDs =
 {
 	-- Channeled spells are periodic but shouldn't be
 
@@ -110,7 +110,7 @@ nonPeriodicSpellIDs =
 	198590, -- Drain soul
 }
 
-spellIDRemap =
+local spellIDRemap =
 {
 	-- Warrior
 	[85384] = 96103, -- Raging Blow (Off-Hand) -> Raging Blow
@@ -245,15 +245,13 @@ function frame:CombatFilter(_, clue, _, sourceGUID, _, sourceFlags, _, destGUID,
 		local destUnit = guidToUnit[destGUID];
 		if destUnit or (destGUID == playerGUID and settings.personal) then
 			if (string.find(clue, "_DAMAGE")) then
-				local spellID, spellName, spellSchool, amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand;
+				local spellID, spellName, spellSchool, amount, overkill, school, school_ignore, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand;
 				if (string.find(clue, "SWING")) then
-					spellName, amount, overkill, school_ignore, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand = "swing"
-						, ...;
+					spellName, amount, overkill, school_ignore, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand = "swing", ...;
 				elseif (string.find(clue, "ENVIRONMENTAL")) then
 					spellName, amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing = ...;
 				else
-					spellID, spellName, spellSchool, amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing
-						, isOffHand = ...;
+					spellID, spellName, spellSchool, amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand = ...;
 				end
 
 				if not school or not spellID or spellID == 75 then
@@ -281,6 +279,7 @@ function frame:HandleDamageEvent(sourceGUID, destGUID, spellID, amount, school, 
 	-- Nameplate
 
 	local unit = guidToUnit[destGUID];
+	local nameplate;
 	if unit then
 		nameplate = C_NamePlate.GetNamePlateForUnit(unit);
 	elseif destGUID == playerGUID then
@@ -297,7 +296,7 @@ function frame:HandleDamageEvent(sourceGUID, destGUID, spellID, amount, school, 
 		or string.find(clue, "_PERIODIC") and not tContains(nonPeriodicSpellIDs, spellID)
 		or tContains(periodicSpellIDs, spellID);
 
-	amount = amount * settings.juiceFactor;
+	amount = amount * (settings.juiceFactor or 1);
 
 	local fontSize = 20 * math.log10(amount) * 0.5;
 	if periodic then fontSize = fontSize * .6; end
