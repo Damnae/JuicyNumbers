@@ -157,16 +157,16 @@ local damageColors =
 	[64] = "EA9AF9", -- arcane
 
 	-- Arcane variants
-	[2 + 64] = "FFE680", -- divine		(+holy, use holy color)
-	[8 + 64] = "5ADB4D", -- astral		(+nature, use nature color)
-	[4 + 64] = "FF8000", -- spellfire	(+fire, use fire color)
-	[16 + 64] = "70D2FA", -- spellfrost	(+frost, use frost color)
+	[2 + 64] = "FFE680", -- divine			(+holy, use holy color)
+	[8 + 64] = "5ADB4D", -- astral			(+nature, use nature color)
+	[4 + 64] = "FF8000", -- spellfire		(+fire, use fire color)
+	[16 + 64] = "70D2FA", -- spellfrost		(+frost, use frost color)
 	[32 + 64] = "8D5FCE", -- spellshadow	(+shadow, use shadow color)
 
 	-- Shadow variants
 	[2 + 32] = "8D5FCE", -- twilight		(+holy, use shadow color)
-	[4 + 32] = "C65615", -- shadowflame	(+fire)
-	[8 + 32] = "BADDAD", -- plague		(+nature)
+	[4 + 32] = "C65615", -- shadowflame		(+fire)
+	[8 + 32] = "BADDAD", -- plague			(+nature)
 	[16 + 32] = "B1ABF7", -- shadowfrost	(+frost)
 
 	-- Fire variants
@@ -175,7 +175,7 @@ local damageColors =
 	[4 + 8] = "FF8000", -- firestorm	(fire + nature, use fire color)
 
 	-- Misc
-	[8 + 16] = "70D2FA", -- froststorm	(frost + nature, use frost color)
+	[8 + 16] = "70D2FA", -- froststorm		(frost + nature, use frost color)
 	[4 + 8 + 16] = "4DFFD1", -- elemental	(fire + frost + nature)
 
 	-- Chaos is Arcane Fire Frost Nature Shadow + optionally Physical and Holy
@@ -501,8 +501,8 @@ function frame:acquireFloatingText(sourceGUID, destGUID, spellID, amount, crit)
 	floatingText.sourceGUID = sourceGUID;
 	floatingText.destGUID = destGUID;
 	floatingText.spellID = spellID;
-	if crit then floatingText.critCount = floatingText.critCount + 1; end
 	floatingText.hitCount = floatingText.hitCount + 1;
+	if crit then floatingText.critCount = floatingText.critCount + 1; end
 
 	return floatingText;
 end
