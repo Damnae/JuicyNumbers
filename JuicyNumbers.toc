@@ -1,4 +1,4 @@
-## Interface: 10000
+## Interface: 100002
 ## Version: @project-version@
 ## Title: JuicyNumbers
 ## Author: Damnae
