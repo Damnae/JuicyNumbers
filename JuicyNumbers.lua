@@ -62,6 +62,8 @@ local periodicSpellIDs =
 	191037, -- Starfall
 	365640, -- Fury of Elune
 	211545, -- Fury of Elune
+	202497, -- Shooting Stars
+	393869, -- Lunar Shrapnel
 
 	-- Rogue
 	315585, -- Instant Poison
