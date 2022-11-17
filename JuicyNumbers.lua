@@ -110,6 +110,10 @@ local nonPeriodicSpellIDs =
 	-- Warlock
 	-- Drain life
 	198590, -- Drain soul
+
+	-- Evoker
+	356995, -- Disintegrate
+	353759, -- Deep Breath
 }
 
 local spellIDRemap =
