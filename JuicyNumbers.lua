@@ -15,9 +15,9 @@ local settings =
 	periodicCritAudio = true,
 
 	--@debug@
-	showAllSources = true,
+	--showAllSources = true,
 	personal = true,
-	juiceFactor = 231,
+	juiceFactor = 1,
 	--debugNonPeriodic = true,
 	--debugPeriodic = true,
 	--debugSchool = true,
@@ -304,9 +304,10 @@ function frame:HandleDamageEvent(sourceGUID, destGUID, spellID, amount, school, 
 		or string.find(clue, "_PERIODIC") and not tContains(nonPeriodicSpellIDs, spellID)
 		or tContains(periodicSpellIDs, spellID);
 
+	local ampAmount = frame:getAmpAmount(amount);
 	amount = amount * (settings.juiceFactor or 1);
 
-	local fontSize = 20 * math.log10(amount) * 0.5;
+	local fontSize = 20 * math.log10(ampAmount) * 0.5;
 	if periodic then fontSize = fontSize * .6; end
 	fontSize = math.max(16, fontSize);
 
@@ -349,7 +350,7 @@ function frame:HandleDamageEvent(sourceGUID, destGUID, spellID, amount, school, 
 
 	-- Animate
 
-	local mainDuration = math.min(0.25 + 0.25 * math.log(1 + amount * 0.002), 1.0);
+	local mainDuration = math.min(0.25 + 0.25 * math.log(1 + ampAmount * 0.002), 1.0);
 	local scaleDuration = 0.2;
 	local fadeDuration = 0.15;
 
@@ -552,6 +553,22 @@ function frame:toCommaSeperated(number)
 	local _, _, sign, value, fraction = tostring(number):find('([-]?)(%d+)([.]?%d*)');
 	value = value:reverse():gsub("(%d%d%d)", "%1,");
 	return sign .. value:reverse():gsub("^,", "") .. fraction;
+end
+
+function frame:getAmpAmount(amount)
+	local playerLevel = UnitLevel("player");
+	local scaling = 1;
+	if playerLevel < 40 then
+		-- From 10x to 8x at lvl 40
+		scaling = (10 - playerLevel * 0.05);
+	elseif playerLevel < 60 then
+		-- From 8x to 5x at lvl 60
+		scaling = (8 - (playerLevel - 40) * 0.15);
+	elseif playerLevel < 70 then
+		-- From 5x to 1x at lvl 69
+		scaling = (5 - (playerLevel - 60) * 0.5);
+	end
+	return amount * scaling;
 end
 
 -- Positionning
