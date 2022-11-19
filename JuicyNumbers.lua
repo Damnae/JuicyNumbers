@@ -164,8 +164,8 @@ local damageColors =
 
 	-- Arcane variants
 	[2 + 64] = "FFE680", -- divine			(+holy, use holy color)
-	[8 + 64] = "5ADB4D", -- astral			(+nature, use nature color)
 	[4 + 64] = "FF8000", -- spellfire		(+fire, use fire color)
+	[8 + 64] = "4DDBBF", -- astral			(+nature)
 	[16 + 64] = "70D2FA", -- spellfrost		(+frost, use frost color)
 	[32 + 64] = "8D5FCE", -- spellshadow	(+shadow, use shadow color)
 
@@ -176,9 +176,9 @@ local damageColors =
 	[16 + 32] = "B1ABF7", -- shadowfrost	(+frost)
 
 	-- Fire variants
-	[4 + 16] = "A8F0FF", -- frostfire	(fire + frost)
 	[2 + 4] = "FFE680", -- radiant		(fire + holy, use holy color)
 	[4 + 8] = "FF8000", -- firestorm	(fire + nature, use fire color)
+	[4 + 16] = "A8F0FF", -- frostfire	(fire + frost)
 
 	-- Misc
 	[8 + 16] = "70D2FA", -- froststorm		(frost + nature, use frost color)
